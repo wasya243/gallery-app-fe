@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 import {AuthService} from '../../auth/auth.service';
@@ -21,8 +21,8 @@ export class SignInComponent implements OnInit {
     private authTokenService: AuthTokenService
   ) {
     this.signInForm = this.fb.group({
-      email: [''],
-      password: ['']
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     });
   }
 
@@ -30,6 +30,14 @@ export class SignInComponent implements OnInit {
     if (this.authService.isAuthorized()) {
       this.router.navigate(['gallery']);
     }
+  }
+
+  get email(): AbstractControl {
+    return this.signInForm.get('email');
+  }
+
+  get password(): AbstractControl {
+    return this.signInForm.get('password');
   }
 
   onSubmit(): void {

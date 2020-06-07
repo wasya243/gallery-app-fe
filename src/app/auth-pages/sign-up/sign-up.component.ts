@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 import {AuthService} from '../../auth/auth.service';
@@ -19,10 +19,10 @@ export class SignUpComponent implements OnInit {
     private authService: AuthService
   ) {
     this.signUpForm = this.fb.group({
-      email: [''],
-      firstName: [''],
-      lastName: [''],
-      password: ['']
+      email: ['', [Validators.required, Validators.email]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 
@@ -30,6 +30,22 @@ export class SignUpComponent implements OnInit {
     if (this.authService.isAuthorized()) {
       this.router.navigate(['gallery']);
     }
+  }
+
+  get email(): AbstractControl {
+    return this.signUpForm.get('email');
+  }
+
+  get password(): AbstractControl {
+    return this.signUpForm.get('password');
+  }
+
+  get firstName(): AbstractControl {
+    return this.signUpForm.get('firstName');
+  }
+
+  get lastName(): AbstractControl {
+    return this.signUpForm.get('lastName');
   }
 
   onSubmit(): void {
