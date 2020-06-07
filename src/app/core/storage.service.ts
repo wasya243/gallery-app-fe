@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CoreModule} from './core.module';
 
-import {GalleryUser} from '../../types/user';
+import {User} from '../../types/user';
 
 @Injectable({
   providedIn: CoreModule
@@ -18,7 +18,7 @@ export class StorageService {
     return this;
   }
 
-  get(key: string, parse: boolean = false): GalleryUser | string {
+  get(key: string, parse: boolean = false): User | string {
     const item = this.getStorage().getItem(this.getStorageKey(key));
     if (!parse) {
 
@@ -49,8 +49,8 @@ export class StorageService {
     return this.remove('user');
   }
 
-  getUserData(): GalleryUser {
-    return this.get('user', true) as GalleryUser;
+  getUserData(): User {
+    return this.get('user', true) as User;
   }
 
   private getStorage(): Storage {

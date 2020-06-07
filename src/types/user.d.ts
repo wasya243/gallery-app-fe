@@ -1,4 +1,4 @@
-export interface GalleryUser {
+export interface User {
   accessToken: string;
   galleryUser: {
     email: string;
