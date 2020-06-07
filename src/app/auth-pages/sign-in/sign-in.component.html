@@ -4,10 +4,10 @@
     <input type="email" formControlName="email" id="email">
   </div>
   <div *ngIf="email.invalid && email.touched && email['errors'].required">
-    Email is required
+    <span>Email is required</span>
   </div>
   <div *ngIf="email.invalid && email.touched && email['errors'].email">
-    Email has wrong format
+    <span>Email has wrong format</span>
   </div>
 
   <div>
@@ -15,9 +15,11 @@
     <input type="password" formControlName="password" id="password">
   </div>
   <div *ngIf="password.invalid && password.touched">
-    Password is required
+    <span>Password is required</span>
   </div>
 
+  <div *ngIf="beErrorMessage"></div>
+  <span>{{beErrorMessage}}</span>
   <div>
     <button type="submit" [disabled]="signInForm.touched && signInForm.invalid">Sing In</button>
   </div>
