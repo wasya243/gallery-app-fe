@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {CoreModule} from './core.module';
 
+import {GalleryUser} from '../../types/user';
+
 @Injectable({
   providedIn: CoreModule
 })
@@ -16,8 +18,7 @@ export class StorageService {
     return this;
   }
 
-  // TODO: add types
-  get(key: string, parse: boolean = false): any | string {
+  get(key: string, parse: boolean = false): GalleryUser | string {
     const item = this.getStorage().getItem(this.getStorageKey(key));
     if (!parse) {
 
@@ -48,9 +49,8 @@ export class StorageService {
     return this.remove('user');
   }
 
-  // TODO: add types
-  getUserData(): any {
-    return this.get('user', true);
+  getUserData(): GalleryUser {
+    return this.get('user', true) as GalleryUser;
   }
 
   private getStorage(): Storage {

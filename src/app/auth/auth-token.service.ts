@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {StorageService} from '../core/storage.service';
 
+import {GalleryUser} from '../../types/user';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,8 +11,7 @@ export class AuthTokenService {
   private accessToken: string;
 
   constructor(private storageService: StorageService) {
-    // TODO: add types
-    const user = this.storageService.get('user', true);
+    const user: GalleryUser = this.storageService.get('user', true) as GalleryUser;
 
     if (user) {
       this.accessToken = user.accessToken;
