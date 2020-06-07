@@ -4,12 +4,16 @@ import {NgModule} from '@angular/core';
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',
+    redirectTo: 'gallery',
     pathMatch: 'full'
   },
   {
     path: 'auth',
     loadChildren: () => import('src/app/auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'gallery',
+    loadChildren: () => import('src/app/gallery/gallery.module').then(m => m.GalleryModule)
   },
   {
     path: '**', redirectTo: ''
