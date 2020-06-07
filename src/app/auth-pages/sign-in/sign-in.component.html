@@ -1,1 +1,15 @@
-<p>sign-in works!</p>
+<form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email">Email</label>
+    <input type="email" formControlName="email" id="email">
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input type="password" formControlName="password" id="password">
+  </div>
+
+  <div>
+    <button type="submit" [disabled]="signInForm.touched && signInForm.invalid">Sing In</button>
+  </div>
+</form>
