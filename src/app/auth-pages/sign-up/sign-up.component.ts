@@ -33,7 +33,13 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.signUpForm.value);
+    this.authService.signUp(this.signUpForm.value)
+      .subscribe(response => {
+        console.log('user is signed up', response);
+        this.router.navigate(['auth/sign-in']);
+      }, err => {
+        console.error(err);
+      });
   }
 
 }
