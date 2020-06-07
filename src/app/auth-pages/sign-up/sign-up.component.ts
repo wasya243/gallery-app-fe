@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
+
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,9 +11,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  signUpForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this.signUpForm = this.fb.group({
+      email: [''],
+      firstName: [''],
+      lastName: [''],
+      password: ['']
+    });
+  }
 
   ngOnInit(): void {
+    if (this.authService.isAuthorized()) {
+      this.router.navigate(['gallery']);
+    }
+  }
+
+  onSubmit(): void {
+    console.log(this.signUpForm.value);
   }
 
 }
