@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../auth/auth.service';
 import {AuthTokenService} from '../../auth/auth-token.service';
 import {debounceTime} from 'rxjs/operators';
+import {StorageService} from '../../core/storage.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -21,7 +22,8 @@ export class SignInComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private authTokenService: AuthTokenService
+    private authTokenService: AuthTokenService,
+    private storageService: StorageService
   ) {
     this.signInForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -54,6 +56,7 @@ export class SignInComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         console.log('user is logged in', response);
         this.authTokenService.setToken(response.accessToken);
+        this.storageService.saveUserData(response);
         this.router.navigate(['gallery']);
       }, err => {
         console.error(err);

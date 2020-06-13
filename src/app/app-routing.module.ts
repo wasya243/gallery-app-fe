@@ -6,7 +6,7 @@ import {MasterGuard} from './auth/master-guard.service';
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',
+    redirectTo: 'gallery',
     pathMatch: 'full'
   },
   {
