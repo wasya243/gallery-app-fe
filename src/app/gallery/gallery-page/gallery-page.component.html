@@ -1,1 +1,6 @@
-<p>gallery-page works!</p>
+<div>
+  <div *ngFor="let picture of pictures">
+    <h3>{{picture.title}}</h3>
+    <p>{{picture.description}}</p>
+  </div>
+</div>
